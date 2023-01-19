@@ -89,6 +89,44 @@ bool IsParallel(int[] arrayCoord)
         return false;
 }
 
+// Проверяет прямые на совпадение. В массиве координаты (коэффициенты)  прямых
+// arrayCoord[0] - b1, arrayCoord[1] - k1, arrayCoord[2] - b2, arrayCoord[3] - k2
+// Прямые линии совпадают, если: k1 = q * k2 и b1 = q * b2, где  q - целое число
+// Возвращает: true если прямые параллельны иначе - false
+bool IsMatching(int[] arrayCoord)
+{
+    int b1 = arrayCoord[0];
+    int k1 = arrayCoord[1];
+    int b2 = arrayCoord[2];
+    int k2 = arrayCoord[3];
+    int rest1, rest2;
+    int q1, q2;
+
+    if(k1 >= k2) {
+        rest1 = k1 % k2;
+        q1 = k1 / k2;
+    }
+    else {
+        rest1 = k2 % k1;
+        q1 = k2 / k1; 
+    }
+
+    if(b1 >= b2) {
+        rest2 = b1 % b2;
+        q2 = b1 / b2;
+    }
+    else {
+        rest2 = b2 % b1;
+        q2 = b2 / b1;
+    }
+
+    if(rest1 == 0 && rest2 == 0)
+        if(q1 == q2)
+            return true;
+
+    return false;
+}
+
 // Находит координаты пересечения двух прямых на плоскости, значения возвращает в виде
 // массива double, где array[0] - x и array[1] - y
 // Возвращает массив double, array[0] - x и array[1] - y
@@ -144,6 +182,12 @@ void main()
     if(IsParallel(arrayCoord) == true)
     {
         Console.WriteLine("\n Lines are parallel, sorry!!!");
+        return;        
+    }
+
+    if(IsMatching(arrayCoord) == true)
+    {
+        Console.WriteLine("\n Lines are matching, sorry!!!");
         return;        
     }
 
