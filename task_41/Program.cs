@@ -32,6 +32,7 @@ string GetNormilizeStrOfIntegers(string strArray)
     return strArray.Replace(",", "");
 }
 
+// Конвертирует строку целых чисел в массив строк целых чисел
 // Возвращает массив слов, где каждый элемент массива целое число в виде строки.
 string[] GetStrArrayOfNumvers(string strDigits)
 {
