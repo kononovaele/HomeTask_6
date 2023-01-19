@@ -71,6 +71,11 @@ int GetCountDigitsBiggerZero(int[] arrayDigits)
     return count;
 }
 
+void PrintRezult(int countDigitsBiggerZero)
+{
+    Console.WriteLine($"\n Count of digits bigger than zero is: {countDigitsBiggerZero}");
+}
+
 void main()
 {
     Console.WriteLine(" ------- Task-41 -------");
@@ -94,6 +99,9 @@ void main()
 
     // Получим количество чисел больше нуля из массива целых чисел
     int countDigitsBiggerZero = GetCountDigitsBiggerZero(arrayOfDigits);
+
+    // Печатаем результат (красиво), количество введенных чисел больше нуля
+    PrintRezult(countDigitsBiggerZero);
 }
 
 main();
