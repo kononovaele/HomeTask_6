@@ -33,6 +33,11 @@ string InputIntegerDigitsAsString()
     return str;
 }
 
+string GetNormilizeStrOfIntegers(string strArray)
+{
+    return strArray.Replace(",", "");
+}
+
 // Печатаем коэффициенты прямых из данных ввода
 void PrintInput(int[] array)
 {
@@ -108,16 +113,18 @@ double[] GetCoordIntersectionOfLines(int[] arrayCoord)
 // coordXY[1] - Y
 void PrintCoord(double[] coordXY)
 {
-    Console.WriteLine($"Coord is: ({coordXY[0]}; {coordXY[1]})");
+    Console.WriteLine($"\nCoord is: ({coordXY[0]}; {coordXY[1]})");
 }
 
 void main()
 {
-    Console.WriteLine(" ------- Task-43 -------");
+    Console.WriteLine("\n ------- Task-43 -------");
 
     // Получить строку ввода целых чисел. Формат (порядок) ввода: b1 k1 b2 k1
     // Пример: ввели "-11, 55, 2, -9", коэффициенты: b1 = -11  k1 = 55 b2 = 2 k2 = -9
     string strDigits = InputIntegerDigitsAsString();
+
+    strDigits = GetNormilizeStrOfIntegers(strDigits);
 
     // Получим массив строк, где строка - целое число в виде строки
     string[] wordsOfNumbers = GetStrArrayOfNumvers(strDigits);
