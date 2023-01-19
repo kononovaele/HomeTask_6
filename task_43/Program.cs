@@ -33,6 +33,12 @@ string InputIntegerDigitsAsString()
     return str;
 }
 
+// Печатаем коэффициенты прямых из данных ввода
+void PrintInput(int[] array)
+{
+    Console.Write($"\nYou input coef: b1={array[0]}, k1={array[1]}, b2={array[2]}, k2={array[3]}");
+}
+
 // Конвертирует строку целых чисел в массив строк целых чисел
 // Возвращает массив слов, где каждый элемент массива целое число в виде строки.
 string[] GetStrArrayOfNumvers(string strDigits)
@@ -78,12 +84,31 @@ bool IsParallel(int[] arrayCoord)
         return false;
 }
 
-
+// Находит координаты пересечения двух прямых на плоскости, значения возвращает в виде
+// массива double, где array[0] - x и array[1] - y
+// Возвращает массив double, array[0] - x и array[1] - y
 double[] GetCoordIntersectionOfLines(int[] arrayCoord)
 {
     double[] coord = new double[2];
+    double b1 = arrayCoord[0];
+    double k1 = arrayCoord[1];
+    double b2 = arrayCoord[2];
+    double k2 = arrayCoord[3];
+
+    double x = (b1 - b2) / (k2 - k1);
+    double y = k1 * x + b1;
+
+    coord[0] = x;
+    coord[1] = y;
 
     return coord;
+}
+
+// Печатаем координаты точки пересечения двух прямых на плоскости, coordXY[0] - X
+// coordXY[1] - Y
+void PrintCoord(double[] coordXY)
+{
+    Console.WriteLine($"Coord is: ({coordXY[0]}; {coordXY[1]})");
 }
 
 void main()
@@ -93,13 +118,15 @@ void main()
     // Получить строку ввода целых чисел. Формат (порядок) ввода: b1 k1 b2 k1
     // Пример: ввели "-11, 55, 2, -9", коэффициенты: b1 = -11  k1 = 55 b2 = 2 k2 = -9
     string strDigits = InputIntegerDigitsAsString();
-    Console.WriteLine($"\n You input digits: {strDigits}");
 
     // Получим массив строк, где строка - целое число в виде строки
     string[] wordsOfNumbers = GetStrArrayOfNumvers(strDigits);
 
     // Конвертируем массив строк в массив целых числех
     int[] arrayCoord = GetConvertStrArrayToArrayInt(wordsOfNumbers);
+
+    // Печатаем коэффициенты, что ввели
+    PrintInput(arrayCoord);
 
     if(IsPerpendicular(arrayCoord) == true)
     {
@@ -113,8 +140,10 @@ void main()
         return;        
     }
 
+    // Получим координтау пересечения прямых в виде массива, где [0] - Х b [1] - Y
+    double[] coordXY = GetCoordIntersectionOfLines(arrayCoord);
     // Печатаем результат (красиво), количество введенных чисел больше нуля
-    //PrintRezult(countDigitsBiggerZero);
+    PrintCoord(coordXY);
 }
 
 main();
